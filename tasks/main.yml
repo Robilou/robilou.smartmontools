@@ -7,15 +7,22 @@
 
   tags:
    - install
-   - step_1#
+   - step_1
 
 # ---------------------------------------------------------------------
-#- name: CONFIG | Copy template smartd.conf
-#  template: backup=yes src=smartd.conf.j2 dest=/usr/local/etc/smartd.conf owner=root group=wheel mode=0640
-#
-#  tags:
-#   - config
-#
+- name: CONFIG | Copy template smartd.conf
+  template: >
+   backup=yes 
+   src=smartd.conf.j2 
+   dest=/usr/local/etc/smartd.conf 
+   owner=root 
+   group=wheel 
+   mode=0640
+
+  tags:
+   - config
+   - step_2
+
 # ---------------------------------------------------------------------
 #- name: CONFIG | Enable Smartmontools in /etc/rc.conf
 #  lineinfile: backup=yes dest=/etc/rc.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
