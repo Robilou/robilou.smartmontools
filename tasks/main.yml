@@ -23,16 +23,43 @@
    - config
    - step_2
 
+# --------------------------------------------------------------------
+- name: CONFIG | Label Smartmontools in /etc/rc.conf
+  lineinfile: >
+   backup=yes
+   dest=/etc/rc.conf
+   regexp="^{{ item.key }}"
+   line="{{ item.key }}"
+   owner=root
+   group=wheel
+   mode=0640
+
+  with_items:
+   - { key: "# --- sshguard --- #"}
+   
+  tags:
+   - config
+   - step_3
+
+
 # ---------------------------------------------------------------------
-#- name: CONFIG | Enable Smartmontools in /etc/rc.conf
-#  lineinfile: backup=yes dest=/etc/rc.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
-#
-#  with_items: 
-#   - { key: "smartd_enable=", value: "YES"}
-# 
-#  tags:
-#   - config
-#   
+- name: CONFIG | Enable Smartmontools in /etc/rc.conf
+  lineinfile: >
+   backup=yes 
+   dest=/etc/rc.conf 
+   regexp="^{{ item.key }}" 
+   line="{{ item.key }}\"{{ item.value }}\"" 
+   owner=root 
+   group=wheel 
+   mode=0640
+
+  with_items: 
+   - { key: "smartd_enable=", value: "YES"}
+ 
+  tags:
+   - config
+   - step_3
+   
 # ---------------------------------------------------------------------
 #- name: CONFIG | Crete /etc/periodic.conf
 #  file: path=/etc/periodic.conf
