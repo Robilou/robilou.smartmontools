@@ -7,48 +7,49 @@
 
   tags:
    - install
+   - step_1#
 
 # ---------------------------------------------------------------------
-- name: CONFIG | Copy template smartd.conf
-  template: backup=yes src=smartd.conf.j2 dest=/usr/local/etc/smartd.conf owner=root group=wheel mode=0640
-
-  tags:
-   - config
-
+#- name: CONFIG | Copy template smartd.conf
+#  template: backup=yes src=smartd.conf.j2 dest=/usr/local/etc/smartd.conf owner=root group=wheel mode=0640
+#
+#  tags:
+#   - config
+#
 # ---------------------------------------------------------------------
-- name: CONFIG | Enable Smartmontools in /etc/rc.conf
-  lineinfile: backup=yes dest=/etc/rc.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
-
-  with_items: 
-   - { key: "smartd_enable=", value: "YES"}
- 
-  tags:
-   - config
-   
+#- name: CONFIG | Enable Smartmontools in /etc/rc.conf
+#  lineinfile: backup=yes dest=/etc/rc.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
+#
+#  with_items: 
+#   - { key: "smartd_enable=", value: "YES"}
+# 
+#  tags:
+#   - config
+#   
 # ---------------------------------------------------------------------
-- name: CONFIG | Crete /etc/periodic.conf
-  file: path=/etc/periodic.conf
-   		owner=root
-   		group=wheel
-   		mode=0640
-   		state=touch
-
-  tags:
-   - config
-
-
+#- name: CONFIG | Crete /etc/periodic.conf
+#  file: path=/etc/periodic.conf
+#   		owner=root
+#   		group=wheel
+#   		mode=0640
+#   		state=touch
+#
+#  tags:
+#   - config
+#
+#
 # ---------------------------------------------------------------------
-- name: CONFIG | Enable Smartmontools in /etc/periodic.conf
-  lineinfile: backup=yes dest=/etc/periodic.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
-
-  with_items: 
-   - { key: "daily_status_smart_devices=", value: "/dev/ada2 /dev/ada0 /dev/ada1"}
-  tags:
-   - config
-
+#- name: CONFIG | Enable Smartmontools in /etc/periodic.conf
+#  lineinfile: backup=yes dest=/etc/periodic.conf regexp="^{{ item.key }}" line="{{ item.key }}\"{{ item.value }}\"" owner=root group=wheel mode=0640
+#
+#  with_items: 
+#   - { key: "daily_status_smart_devices=", value: "/dev/ada2 /dev/ada0 /dev/ada1"}
+#  tags:
+#   - config
+#
 # ---------------------------------------------------------------------
-- name: Start Smartmontools
-  service: name=smartd state=started 
-  tags:
-   - start
+#- name: Start Smartmontools
+#  service: name=smartd state=started 
+#  tags:
+#   - start
 
